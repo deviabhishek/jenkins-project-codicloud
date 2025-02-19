@@ -14,6 +14,7 @@ spec:
       labels:
         app: flask-app
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: flask-app
         image: sanjeevkt720/jenkins-flask-app
@@ -26,3 +27,9 @@ spec:
           requests:
             cpu: "0.5"
             memory: "200Mi"
+        volumeMounts:
+        - name: flask-app-storage
+          mountPath: /data
+      volumes:
+      - name: flask-app-storage
+        emptyDir: {}
